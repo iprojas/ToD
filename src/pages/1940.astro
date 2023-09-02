@@ -1,6 +1,6 @@
 ---
 import CanvasContainer from '../components/CanvasContainer.astro'
-import Layout from '../components/Layout.astro'
+import Layout from '../components/Layout-1940.astro'
 import Link from '../components/Link.astro'
 ---
 
@@ -8,7 +8,6 @@ import Link from '../components/Link.astro'
   <main>
     <CanvasContainer />
     <Link class="link" href="https://github.com/iprojas/ToD" target="_blank" rel="noopener noreferrer">About</Link>
-    <Link class="link-nav" href="1940">1940</Link>
     <div class="buttons-container">
       <ul>
         <li class="active"><a href="1940" class="active-text">40s</a></li>
@@ -40,17 +39,17 @@ import Link from '../components/Link.astro'
 </style>
 
 <script>
-const lis = document.querySelectorAll("li");
-const a = document.querySelectorAll("li a");
-
-for (let i = 0; i < lis.length; i++) {
-  lis[i].addEventListener("click", function() {
-    for (let i = 0; i < lis.length; i++) {
-      lis[i].classList.remove("active");
-      a[i].classList.remove("active-text");
-    }
-    this.classList.add("active");
-    a[i].classList.add("active-text");
-  });
-}
-</script>
+  const lis = document.querySelectorAll("li");
+  const a = document.querySelectorAll("li a");
+  
+  for (let i = 0; i < lis.length; i++) {
+    lis[i].addEventListener("click", function() {
+      for (let i = 0; i < lis.length; i++) {
+        lis[i].classList.remove("active");
+        a[i].classList.remove("active-text");
+      }
+      this.classList.add("active");
+      a[i].classList.add("active-text");
+    });
+  }
+  </script>

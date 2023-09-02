@@ -1,0 +1,32 @@
+---
+import CanvasContainer from '../components/CanvasContainer.astro'
+import Layout from '../components/Layout-1980.astro'
+import Link from '../components/Link.astro'
+---
+
+<Layout title="Typologies of Delusion">
+  <main>
+    <CanvasContainer />
+    <Link class="link" href="https://github.com/iprojas/ToD" target="_blank" rel="noopener noreferrer">About</Link>
+    <Link class="link-nav" href="1940">1940</Link>
+   
+  </main>
+</Layout>
+
+<style lang="scss">
+  main {
+    width: 100%;
+    height: 100%;
+  }
+  .link {
+    position: absolute;
+    bottom: 1rem;
+    right: 2rem;
+  }
+
+  .link-nav {
+    position: absolute;
+    bottom: 1rem;
+    left: 2rem;
+  }
+</style>
