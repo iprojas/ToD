@@ -1,0 +1,102 @@
+---
+
+---
+
+  <div class="modal" id="myModal">
+    <div class="modal-content">
+      <h1>Typologies of Delusion</h1>
+      <p>Proin varius non neque quis posuere. Vivamus tincidunt, est vitae pharetra consequat, risus felis viverra arcu, ut semper nisi arcu quis orci. Phasellus eros metus, semper id bibendum non, molestie a mauris. Aliquam ac nibh dolor. Morbi lobortis lacus ut quam tempus, in mattis augue vulputate. Sed aliquet bibendum vestibulum. Ut eleifend quam a risus vehicula, vitae finibus purus interdum.</p>
+    </div>
+  </div>
+
+<style>
+
+  .modal {
+    opacity: 0;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background-color: rgb(255 255 255 / 70%);
+    z-index: 1;
+    text-align: center;
+    transition: opacity 0.2s ease-in-out; 
+    pointer-events: none;
+  }
+
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .modal-content h1 {
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 2;
+  }
+
+  .modal-content p {
+    font-size: 16px;
+    
+  }
+</style>
+
+<script>
+ const modal = document.getElementById('myModal');
+let idleTimeout: ReturnType<typeof setTimeout>;
+let touchActive = false; // Flag to track touch interactions
+
+function showModal() {
+    if (modal && !touchActive) { // Check if touch interactions are not active
+        modal.style.opacity = '1';
+        modal.style.pointerEvents = 'auto'; // Make the modal clickable
+    }
+}
+
+function hideModal() {
+    if (modal) {
+        modal.style.opacity = '0';
+        modal.style.pointerEvents = 'none';
+        resetIdleTimer();
+    }
+}
+
+function resetIdleTimer() {
+    clearTimeout(idleTimeout);
+    idleTimeout = setTimeout(showModal, 10000);
+}
+
+function handleInteraction() {
+    hideModal();
+}
+
+function handleTouchStart() {
+    touchActive = true; // Set the touch flag when a touch interaction occurs
+    hideModal();
+}
+
+function handleTouchEnd() {
+    touchActive = false; // Reset the touch flag when touch interaction ends
+    resetIdleTimer();
+}
+
+window.addEventListener('mousemove', handleInteraction);
+window.addEventListener('keydown', handleInteraction);
+window.addEventListener('touchstart', handleTouchStart, { passive: true });
+window.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+window.addEventListener('beforeunload', () => {
+    window.removeEventListener('mousemove', handleInteraction);
+    window.removeEventListener('keydown', handleInteraction);
+    window.removeEventListener('touchstart', handleTouchStart);
+    window.removeEventListener('touchend', handleTouchEnd);
+    clearTimeout(idleTimeout);
+});
+
+resetIdleTimer();
+</script>
