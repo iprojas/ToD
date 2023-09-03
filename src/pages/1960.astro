@@ -9,7 +9,15 @@ import Link from '../components/Link.astro'
     <CanvasContainer />
     <Link class="link" href="https://github.com/iprojas/ToD" target="_blank" rel="noopener noreferrer">About</Link>
     <Link class="link-nav" href="1940">1940</Link>
-   
+    <div class="buttons-container">
+      <ul>
+        <li><a href="./1940">40s</a></li>
+        <li><a href="./1950">50s</a></li>
+        <li class="active"><a href="#" class="active-text">60s</i></a></li>
+        <li><a href="./1970">70s</a></li>
+        <li><a href="./1980">80s</a></li>
+      </ul>
+    </div>
   </main>
 </Layout>
 
@@ -30,3 +38,19 @@ import Link from '../components/Link.astro'
     left: 2rem;
   }
 </style>
+
+<script>
+  const lis = document.querySelectorAll("li");
+  const a = document.querySelectorAll("li a");
+  
+  for (let i = 0; i < lis.length; i++) {
+    lis[i].addEventListener("click", function() {
+      for (let i = 0; i < lis.length; i++) {
+        lis[i].classList.remove("active");
+        a[i].classList.remove("active-text");
+      }
+      this.classList.add("active");
+      a[i].classList.add("active-text");
+    });
+  }
+  </script>
