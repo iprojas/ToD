@@ -19,9 +19,9 @@ export class TCanvas {
     row: 33,
     col: 30,
     gap: 0.15,
-    }
-    
-    public assets: Assets = {
+  }
+
+  public assets: Assets = {
     image1: { path: 'images/1980s/musician/770878273.webp' },
     image2: { path: 'images/1980s/dancer/770878273.webp' },
     image3: { path: 'images/1980s/filmmaker/770878273.webp' },
@@ -1012,7 +1012,7 @@ export class TCanvas {
     image988: { path: 'images/1980s/transsexual/770878302.webp' },
     image989: { path: 'images/1980s/politicalactivist/770878302.webp' },
     image990: { path: 'images/1980s/hippie/770878302.webp' },
-    }
+  }
 
   constructor(private container: HTMLElement) {
     loadAssets(this.assets).then(() => {
@@ -1063,25 +1063,50 @@ export class TCanvas {
       this.isMouseDowon = false
     })
 
+    // zoom function
+
+    const zoomButton = document.getElementById('zoom');
+    let zoomIn = true;
+
+    if (zoomButton) {
+      zoomButton.addEventListener('click', () => {
+        if (zoomIn) {
+          gl.camera.position.z *= 1.6;
+        } else {
+          gl.camera.position.z /= 1.6;
+        }
+        zoomIn = !zoomIn;
+      });
+    }
+
+    window.addEventListener('keypress', (event) => {
+      if (event.key === 'z') {
+        gl.camera.position.z *= 1.1;
+      }
+      if (event.key === 'x') {
+        gl.camera.position.z /= 1.1;
+      }
+    });
+
     // Add touch event listeners
-window.addEventListener('touchstart', (e) => {
-  this.isMouseDowon = true;
-  const touch = e.touches[0];
-  this.prevMousePosition = { x: touch.clientX, y: touch.clientY };
-})
+    window.addEventListener('touchstart', (e) => {
+      this.isMouseDowon = true;
+      const touch = e.touches[0];
+      this.prevMousePosition = { x: touch.clientX, y: touch.clientY };
+    })
 
-window.addEventListener('touchmove', (e) => {
-  if (this.isMouseDowon) {
-    const touch = e.touches[0];
-    this.cards.userData.target.position.x += (touch.clientX - this.prevMousePosition.x) * 0.004;
-    this.cards.userData.target.position.y -= (touch.clientY - this.prevMousePosition.y) * 0.004;
-    this.prevMousePosition = { x: touch.clientX, y: touch.clientY };
-  }
-})
+    window.addEventListener('touchmove', (e) => {
+      if (this.isMouseDowon) {
+        const touch = e.touches[0];
+        this.cards.userData.target.position.x += (touch.clientX - this.prevMousePosition.x) * 0.004;
+        this.cards.userData.target.position.y -= (touch.clientY - this.prevMousePosition.y) * 0.004;
+        this.prevMousePosition = { x: touch.clientX, y: touch.clientY };
+      }
+    })
 
-window.addEventListener('touchend', () => {
-  this.isMouseDowon = false;
-})
+    window.addEventListener('touchend', () => {
+      this.isMouseDowon = false;
+    })
   }
 
   private createObjects() {
