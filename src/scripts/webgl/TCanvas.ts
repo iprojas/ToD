@@ -71,6 +71,57 @@ export class TCanvas {
     image48: { path: 'images/4 (12).webp' }
   }
 
+  private imageLable: string[] = [
+   ' image1:',
+   ' image2:',
+   ' image3:',
+   ' image4:',
+   ' image5:',
+   ' image6:',
+   ' image7:',
+   ' image8:',
+   ' image9:',
+    'image10:',
+    'image11:',
+    'image12:',
+    'image13:',
+    'image14:',
+    'image15:',
+    'image16:',
+    'image17:',
+    'image18:',
+    'image19:',
+    'image20:',
+    'image21:',
+    'image22:',
+    'image23:',
+    'image24:',
+    'image25:',
+    'image26:',
+    'image27:',
+    'image28:',
+    'image29:',
+    'image30:',
+    'image31:',
+    'image32:',
+    'image33:',
+    'image34:',
+    'image35:',
+    'image36:',
+    'image37:p',
+    'image38:p',
+    'image39:p',
+    'image40',
+    'image41',
+    'image42',
+    'image43',
+    'image44',
+    'image45',
+    'image46',
+    'image47',
+    'image48'
+  ];
+
   constructor(private container: HTMLElement) {
     loadAssets(this.assets).then(() => {
       this.init()
@@ -141,10 +192,42 @@ window.addEventListener('touchend', () => {
 })
   }
 
-  private createObjects() {
-    const { width, height, row, col, gap } = this.cardParams
+  private createLabelTexture(text: string): THREE.Texture {
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+    const width = 256
+    const height = 128
 
-    const geometry = new THREE.PlaneGeometry(width, height, 50, 50)
+    canvas.width = width
+    canvas.height = height
+    // context.fillStyle = 'transparent'
+    // context.fillRect(0, 0, width, height)
+    context.font = '24px monospace'
+    context.fillStyle = 'white'
+    context.textAlign = 'center'
+    context.textBaseline = 'top'
+    context.fillText(text, width / 2, height / 2)
+
+    const texture = new THREE.CanvasTexture(canvas)
+    texture.needsUpdate = true
+    return texture
+  }
+
+  private createLabelMesh(text: string): THREE.Mesh {
+    const labelGeometry = new THREE.PlaneGeometry(1, 0.5) // Adjust size as needed
+    const labelMaterial = new THREE.MeshBasicMaterial({
+      map: this.createLabelTexture(text),
+      transparent: true,
+    })
+    const labelMesh = new THREE.Mesh(labelGeometry, labelMaterial)
+    labelMesh.position.set(0, -0.4, 0.21) // Set the Z-position to be slightly above the card
+    return labelMesh
+  }
+
+  private createObjects() {
+    const { width, height, row, col, gap } = this.cardParams;
+
+    const geometry = new THREE.PlaneGeometry(width, height, 50, 50);
     const material = new THREE.ShaderMaterial({
       uniforms: {
         tImage: { value: null },
@@ -154,37 +237,42 @@ window.addEventListener('touchend', () => {
       },
       vertexShader,
       fragmentShader,
-    })
+    });
 
     const textures = Object.values(this.assets).map((val) => {
-      const texture = val.data as THREE.Texture
-      texture.wrapS = THREE.MirroredRepeatWrapping
-      texture.wrapT = THREE.MirroredRepeatWrapping
-      return texture
-    })
+      const texture = val.data as THREE.Texture;
+      texture.wrapS = THREE.MirroredRepeatWrapping;
+      texture.wrapT = THREE.MirroredRepeatWrapping;
+      return texture;
+    });
 
-    const centerX = ((width + gap) * (col - 1)) / 2
-    const centerY = ((height + gap) * (row - 1)) / 2
-    let i = 0
+    const centerX = ((width + gap) * (col - 1)) / 2;
+    const centerY = ((height + gap) * (row - 1)) / 2;
+    let i = 0;
 
     for (let x = 0; x < col; x++) {
       for (let y = 0; y < row; y++) {
-        const mat = material.clone()
-        mat.uniforms.tImage.value = textures[i++]
-        calcCoveredTextureScale(mat.uniforms.tImage.value, width / height, mat.uniforms.uUvScale.value)
+        const mat = material.clone();
+        mat.uniforms.tImage.value = textures[i++];
+        calcCoveredTextureScale(mat.uniforms.tImage.value, width / height, mat.uniforms.uUvScale.value);
 
-        const mesh = new THREE.Mesh(geometry, mat)
-        mesh.position.set(width * x + gap * x - centerX, height * y + gap * y - centerY, 0)
+        const mesh = new THREE.Mesh(geometry, mat);
+        mesh.position.set(width * x + gap * x - centerX, height * y + gap * y - centerY, 0);
 
-        this.cards.add(mesh)
+        // Create and add label mesh to the card mesh with custom name
+        const customName = this.imageLable[i - 1] || `Image ${i}`;
+        const labelMesh = this.createLabelMesh(customName);
+        mesh.add(labelMesh);
+
+        this.cards.add(mesh);
       }
     }
 
     this.cards.userData.target = {
       position: { x: 0, y: 0, z: 0 },
-    }
+    };
 
-    gl.scene.add(this.cards)
+    gl.scene.add(this.cards);
   }
 
   private resize = () => {
