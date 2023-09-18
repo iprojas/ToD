@@ -134,7 +134,7 @@ export class TCanvas {
   private init() {
     gl.setup(this.container)
     gl.scene.background = new THREE.Color('#000')
-    gl.camera.position.z = this.cardParams.height * 2 + this.cardParams.gap * (this.cardParams.row + 1)
+    gl.camera.position.z = this.cardParams.height * 2 + this.cardParams.gap * 8
     gl.setResizeCallback(this.resize)
     this.resize()
 
@@ -171,6 +171,31 @@ export class TCanvas {
       this.isMouseDowon = false
     })
 
+     // zoom function
+
+     const zoomButton = document.getElementById('zoom');
+     let zoomIn = true;
+ 
+     if (zoomButton) {
+       zoomButton.addEventListener('click', () => {
+         if (zoomIn) {
+           gl.camera.position.z *= 1.6;
+         } else {
+           gl.camera.position.z /= 1.6;
+         }
+         zoomIn = !zoomIn;
+       });
+     }
+ 
+     window.addEventListener('keypress', (event) => {
+       if (event.key === 'z') {
+         gl.camera.position.z *= 1.1;
+       }
+       if (event.key === 'x') {
+         gl.camera.position.z /= 1.1;
+       }
+     });
+
     // Add touch event listeners
 window.addEventListener('touchstart', (e) => {
   this.isMouseDowon = true;
@@ -200,8 +225,6 @@ window.addEventListener('touchend', () => {
 
     canvas.width = width
     canvas.height = height
-    // context.fillStyle = 'transparent'
-    // context.fillRect(0, 0, width, height)
     context.font = '24px monospace'
     context.fillStyle = 'white'
     context.textAlign = 'center'
