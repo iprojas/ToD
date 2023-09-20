@@ -3,8 +3,8 @@ import glsl from 'vite-plugin-glsl'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://typologiesofdelusion.net',
-  base: '/',
+  site: 'https://vercel.com/iprojas/',
+  base: '/tod',
   server: {
     host: true,
   },
