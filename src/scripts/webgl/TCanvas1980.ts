@@ -2714,23 +2714,32 @@ window.addEventListener('touchend', () => {
   }
 
   private createLabelTexture(text: string): THREE.Texture {
-    const canvas = document.createElement('canvas')
-    const context = canvas.getContext('2d')
-    const width = 256
-    const height = 128
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    const width = 256;
+    const height = 128;
 
-    canvas.width = width
-    canvas.height = height
-    context.font = '24px monospace'
-    context.fillStyle = 'white'
-    context.textAlign = 'center'
-    context.textBaseline = 'top'
-    context.fillText(text, width / 2, height / 2)
+    canvas.width = width;
+    canvas.height = height;
 
-    const texture = new THREE.CanvasTexture(canvas)
-    texture.needsUpdate = true
-    return texture
-  }
+    context.font = '18px arial';
+    context.fillStyle = 'white';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+
+    // Add text shadow
+    context.shadowColor = 'rgba(0, 0, 0, 1)'; // Shadow color with transparency
+    context.shadowBlur = 7; // Shadow blur radius
+    context.shadowOffsetX = 2; // Horizontal shadow offset
+    context.shadowOffsetY = 2; // Vertical shadow offset
+
+    context.fillText(text, width / 2, height / 2);
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.needsUpdate = true;
+    return texture;
+}
+
 
   private createLabelMesh(text: string): THREE.Mesh {
     const labelGeometry = new THREE.PlaneGeometry(1, 0.5) // Adjust size as needed
