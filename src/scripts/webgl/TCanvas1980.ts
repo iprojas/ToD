@@ -2630,7 +2630,7 @@ export class TCanvas {
   private init() {
     gl.setup(this.container)
     gl.scene.background = new THREE.Color('#000')
-    gl.camera.position.z = this.cardParams.height * 2 + this.cardParams.gap * 8
+    gl.camera.position.z = (this.cardParams.height * 2 + this.cardParams.gap * 8) * 1.6;
     gl.setResizeCallback(this.resize)
     this.resize()
 
@@ -2675,9 +2675,9 @@ export class TCanvas {
      if (zoomButton) {
        zoomButton.addEventListener('click', () => {
          if (zoomIn) {
-           gl.camera.position.z *= 1.6;
-         } else {
            gl.camera.position.z /= 1.6;
+         } else {
+           gl.camera.position.z *= 1.6;
          }
          zoomIn = !zoomIn;
        });
