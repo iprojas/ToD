@@ -2630,7 +2630,7 @@ export class TCanvas {
   private init() {
     gl.setup(this.container)
     gl.scene.background = new THREE.Color('#000')
-    gl.camera.position.z = (this.cardParams.height * 2 + this.cardParams.gap * 8) * 1.6;
+    gl.camera.position.z = (this.cardParams.height * 2 + this.cardParams.gap * 8) * 0.1526;
     gl.setResizeCallback(this.resize)
     this.resize()
 
@@ -2702,8 +2702,8 @@ window.addEventListener('touchstart', (e) => {
 window.addEventListener('touchmove', (e) => {
   if (this.isMouseDowon) {
     const touch = e.touches[0];
-    this.cards.userData.target.position.x += (touch.clientX - this.prevMousePosition.x) * 0.064;
-    this.cards.userData.target.position.y -= (touch.clientY - this.prevMousePosition.y) * 0.064;
+    this.cards.userData.target.position.x += (touch.clientX - this.prevMousePosition.x) * 0.005;
+    this.cards.userData.target.position.y -= (touch.clientY - this.prevMousePosition.y) * 0.005;
     this.prevMousePosition = { x: touch.clientX, y: touch.clientY };
   }
 })
