@@ -1,16 +1,17 @@
 ---
 import CanvasContainer from '../components/CanvasContainer.astro'
 import Layout from '../components/Layout.astro'
-import About from '../components/Modal.astro'
+import About from '../components/Modal2.astro'
 ---
 
 <Layout title="Typologies of Delusion">
   <main>
     <CanvasContainer />
     <About />
-    <div class="buttons-container2">
-      <ul>
-        <li><a href="#" id="zoom">🔍</i></a></li>
+    <div class="buttons-container">
+      <ul class="single">
+        <li><a href="#" id="zoom"><img src="zoom.svg"></a></li>
+        <li><a href="#" id="mod"><img src="info.svg"></a></li>
       </ul>
     </div>
   </main>

@@ -16,10 +16,9 @@ import About from '../components/Modal.astro'
         <li><a href="../1970">70s</a></li>
         <li><a href="../1980">80s</a></li>
       </ul>
-    </div>
-    <div class="buttons-container2">
       <ul>
-        <li><a href="#" id="zoom">🔍</i></a></li>
+        <li><a href="#" id="zoom"><img src="zoom.svg"></a></li>
+        <li><a href="#" id="mod"><img src="info.svg"></a></li>
       </ul>
     </div>
   </main>
@@ -44,8 +43,9 @@ import About from '../components/Modal.astro'
 </style>
 
 <script>
-  const lis = document.querySelectorAll("li");
-  const a = document.querySelectorAll("li a");
+ const ul = document.getElementById("decades");
+  const lis = ul.querySelectorAll("li");
+  const a = ul.querySelectorAll("li a");
   
   for (let i = 0; i < lis.length; i++) {
     lis[i].addEventListener("click", function() {

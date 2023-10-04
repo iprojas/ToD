@@ -1125,7 +1125,7 @@ window.addEventListener('touchend', () => {
   private createLabelTexture(text: string): THREE.Texture {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    const width = 256;
+    const width = 330;
     const height = 128;
 
     canvas.width = width;
