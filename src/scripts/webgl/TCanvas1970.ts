@@ -2652,8 +2652,8 @@ export class TCanvas {
 
     window.addEventListener('mousemove', (e) => {
       if (this.isMouseDowon) {
-        this.cards.userData.target.position.x += (e.clientX - this.prevMousePosition.x) * 0.004
-        this.cards.userData.target.position.y -= (e.clientY - this.prevMousePosition.y) * 0.004
+        this.cards.userData.target.position.x += (e.clientX - this.prevMousePosition.x) * 0.032
+        this.cards.userData.target.position.y -= (e.clientY - this.prevMousePosition.y) * 0.032
         this.prevMousePosition = { x: e.clientX, y: e.clientY }
       }
     })
