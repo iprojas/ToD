@@ -76,7 +76,7 @@ function hideModal() {
     if (modal) {
         modal.style.opacity = '0';
         modal.style.pointerEvents = 'none';
-        resetIdleTimer();
+        // resetIdleTimer();
     }
 }
 
@@ -96,7 +96,7 @@ function handleTouchStart() {
 
 function handleTouchEnd() {
     touchActive = false; // Reset the touch flag when touch interaction ends
-    resetIdleTimer();
+    // resetIdleTimer();
 }
 
 window.addEventListener('mousemove', handleInteraction);
@@ -119,5 +119,5 @@ modButton.addEventListener('click', () => {
        });
  
 
-resetIdleTimer();
+// resetIdleTimer();
 </script>
