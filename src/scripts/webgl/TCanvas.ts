@@ -1131,7 +1131,7 @@ window.addEventListener('touchend', () => {
     canvas.width = width;
     canvas.height = height;
 
-    context.font = '18px arial';
+    context.font = '22px arial';
     context.fillStyle = 'white';
     context.textAlign = 'center';
     context.textBaseline = 'middle';
