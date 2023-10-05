@@ -1111,8 +1111,8 @@ window.addEventListener('touchstart', (e) => {
 window.addEventListener('touchmove', (e) => {
   if (this.isMouseDowon) {
     const touch = e.touches[0];
-    this.cards.userData.target.position.x += (touch.clientX - this.prevMousePosition.x) * 0.004;
-    this.cards.userData.target.position.y -= (touch.clientY - this.prevMousePosition.y) * 0.004;
+    this.cards.userData.target.position.x += (touch.clientX - this.prevMousePosition.x) * 0.006;
+    this.cards.userData.target.position.y -= (touch.clientY - this.prevMousePosition.y) * 0.006;
     this.prevMousePosition = { x: touch.clientX, y: touch.clientY };
   }
 })
@@ -1131,7 +1131,7 @@ window.addEventListener('touchend', () => {
     canvas.width = width;
     canvas.height = height;
 
-    context.font = '22px arial';
+    context.font = '20px arial';
     context.fillStyle = 'white';
     context.textAlign = 'center';
     context.textBaseline = 'middle';
