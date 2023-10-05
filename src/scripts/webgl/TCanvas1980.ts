@@ -2702,8 +2702,8 @@ window.addEventListener('touchstart', (e) => {
 window.addEventListener('touchmove', (e) => {
   if (this.isMouseDowon) {
     const touch = e.touches[0];
-    this.cards.userData.target.position.x += (touch.clientX - this.prevMousePosition.x) * 0.005;
-    this.cards.userData.target.position.y -= (touch.clientY - this.prevMousePosition.y) * 0.005;
+    this.cards.userData.target.position.x += (touch.clientX - this.prevMousePosition.x) * 0.007;
+    this.cards.userData.target.position.y -= (touch.clientY - this.prevMousePosition.y) * 0.007;
     this.prevMousePosition = { x: touch.clientX, y: touch.clientY };
   }
 })
