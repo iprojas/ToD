@@ -1039,7 +1039,7 @@ export class TCanvas {
   private init() {
     gl.setup(this.container)
     gl.scene.background = new THREE.Color('#000')
-    gl.camera.position.z = this.cardParams.height * 2 + this.cardParams.gap * 2;
+    gl.camera.position.z = this.cardParams.height * 2 + this.cardParams.gap * 12;
     gl.setResizeCallback(this.resize)
     this.resize()
 
