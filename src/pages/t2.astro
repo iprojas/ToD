@@ -1,0 +1,36 @@
+---
+import CanvasContainer from '../components/CanvasContainer.astro'
+import Layout from '../components/Layout.astro'
+import About from '../components/Modal2.astro'
+---
+
+<Layout title="Typologies of Delusion">
+  <main>
+    <CanvasContainer />
+    <About />
+    <div class="buttons-container2">
+      <ul class="single">
+        <li><a href="#" id="zoom"><img src="zoom.svg"></a></li>
+        <li><a href="#" id="mod"><img src="info.svg"></a></li>
+      </ul>
+    </div>
+  </main>
+</Layout>
+
+<style lang="scss">
+  main {
+    width: 100%;
+    height: 100%;
+  }
+  .link {
+    position: absolute;
+    bottom: 1rem;
+    right: 2rem;
+  }
+
+  .link-nav {
+    position: absolute;
+    bottom: 1rem;
+    left: 2rem;
+  }
+</style>

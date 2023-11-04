@@ -1,36 +1,52 @@
 ---
-import CanvasContainer from '../components/CanvasContainer.astro'
-import Layout from '../components/Layout.astro'
-import About from '../components/Modal2.astro'
+
 ---
 
-<Layout title="Typologies of Delusion">
-  <main>
-    <CanvasContainer />
-    <About />
-    <div class="buttons-container2">
-      <ul class="single">
-        <li><a href="#" id="zoom"><img src="zoom.svg"></a></li>
-        <li><a href="#" id="mod"><img src="info.svg"></a></li>
-      </ul>
+<div class="modal" id="myModal">
+  <div class="modal-content">
+    <img src="logo.svg" width="100%" height="auto" style="margin-bottom:30px">
+    <a href="/1940"> <h1>Typologies 01: Faces</h1></a>
+    <a href="/t2"> <h1>Typologies 02: Film Stills</h1></a> 
     </div>
-  </main>
-</Layout>
 
-<style lang="scss">
-  main {
-    width: 100%;
-    height: 100%;
-  }
-  .link {
-    position: absolute;
-    bottom: 1rem;
-    right: 2rem;
-  }
+</div>
 
-  .link-nav {
-    position: absolute;
-    bottom: 1rem;
-    left: 2rem;
-  }
+<style>
+
+.modal {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  background-color: rgb(255 255 255 / 70%);
+  z-index: 1;
+  text-align: center;
+  transition: opacity 0.2s ease-in-out; 
+}
+
+a {
+    font-family: monospace;
+    color: blue;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-content h1 {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 2;
+}
+
+.modal-content p {
+  font-size: 16px;
+  
+}
 </style>
