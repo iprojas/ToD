@@ -52,14 +52,14 @@
 </style>
 
 <script>
- const modal = document.getElementById('myModal');
-let idleTimeout: ReturnType<typeof setTimeout>;
-let touchActive = false; // Flag to track touch interactions
+const modal = document.getElementById('myModal');
+let touchActive = false;
 
 function showModal() {
-    if (modal && !touchActive) { // Check if touch interactions are not active
+    if (modal && !touchActive) {
         modal.style.opacity = '1';
-        modal.style.pointerEvents = 'auto'; // Make the modal clickable
+        modal.style.pointerEvents = 'auto';
+        modal.addEventListener('click', hideModal); // Add click event listener to hide modal on click
     }
 }
 
@@ -67,48 +67,42 @@ function hideModal() {
     if (modal) {
         modal.style.opacity = '0';
         modal.style.pointerEvents = 'none';
-        // resetIdleTimer();
+        modal.removeEventListener('click', hideModal); // Remove click event listener when hiding modal
     }
 }
-
-// function resetIdleTimer() {
-//     clearTimeout(idleTimeout);
-//     idleTimeout = setTimeout(showModal, 20000);
-// }
 
 function handleInteraction() {
     hideModal();
 }
 
 function handleTouchStart() {
-    touchActive = true; // Set the touch flag when a touch interaction occurs
+    touchActive = true;
     hideModal();
 }
 
 function handleTouchEnd() {
-    touchActive = false; // Reset the touch flag when touch interaction ends
-    // resetIdleTimer();
+    touchActive = false;
 }
 
-window.addEventListener('mousemove', handleInteraction);
-window.addEventListener('keydown', handleInteraction);
-window.addEventListener('touchstart', handleTouchStart, { passive: true });
-window.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-window.addEventListener('beforeunload', () => {
-    window.removeEventListener('mousemove', handleInteraction);
-    window.removeEventListener('keydown', handleInteraction);
+function cleanupEventListeners() {
     window.removeEventListener('touchstart', handleTouchStart);
     window.removeEventListener('touchend', handleTouchEnd);
+}
+
+function setupEventListeners() {
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+}
+
+const modButton = document.getElementById('mod');
+
+modButton.addEventListener('click', showModal);
+
+setupEventListeners();
+
+window.addEventListener('beforeunload', () => {
+    cleanupEventListeners();
     clearTimeout(idleTimeout);
 });
 
-const modButton = document.getElementById('mod');
-  
-modButton.addEventListener('click', () => {
-           showModal();
-       });
- 
-
-// resetIdleTimer();
 </script>
