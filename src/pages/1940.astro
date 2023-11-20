@@ -2,11 +2,22 @@
 import CanvasContainer from '../components/CanvasContainer.astro'
 import Layout from '../components/Layout-1940.astro'
 import About from '../components/Modal.astro'
+import { onMount } from 'solid-js';
+let isLoading = true;
+
+onMount(async () => {
+  await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate delay
+  isLoading = false;
+});
 ---
 
 <Layout title="Typologies of Delusion">
   <main>
-    <CanvasContainer />
+    {isLoading ? (
+  <div>Loading...</div>
+) : (
+  <CanvasContainer />
+)}
     <About />
     <div class="buttons-container">
       <ul id="decades">
